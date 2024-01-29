@@ -26,7 +26,7 @@ public class TestSpicejet {
         String mainWindow = driver.getWindowHandle();
         SpicejetDashboardPage dashboardPage = new SpicejetDashboardPage(driver);
         SpicejetSignUpPage spicejetSignUpPage = new SpicejetSignUpPage(driver);
-        dashboardPage.clickOnSignUpButton();
+        dashboardPage.openSignUpWindow();
         Set<String> windows = driver.getWindowHandles();
         Iterator<String> itr = windows.iterator();
         while (itr.hasNext()) {
@@ -51,8 +51,22 @@ public class TestSpicejet {
 
     @Test
     public void testSignIn() {
-
-
+        driver.navigate().to("https://www.spicejet.com/");
+        String mainWindow = driver.getWindowHandle();
+        SpicejetDashboardPage dashboardPage = new SpicejetDashboardPage(driver);
+        SpicejetLoginPage spicejetLoginPage = new SpicejetLoginPage(driver);
+        dashboardPage.openSignInWindow();
+        Set<String> windows = driver.getWindowHandles();
+        Iterator<String> itr = windows.iterator();
+        while (itr.hasNext()) {
+            String childWindow = itr.next();
+            if (!childWindow.equals(mainWindow)) {
+                driver.switchTo().window(childWindow);
+                break;
+            }
+        }
+        spicejetLoginPage.enterMobileNumber();
+        spicejetLoginPage.enterPassword();
+        spicejetLoginPage.clickOnLogin();
     }
-
 }

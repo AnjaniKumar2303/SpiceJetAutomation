@@ -12,12 +12,13 @@ public class SpicejetDashboardPage {
     }
 
     By signUp = By.linkText("Signup");
+    By signIn = By.linkText("Login");
 
-    public void clickOnSignUpButton() {
+    public void openSignUpWindow() {
         driver.findElement(signUp).click();
     }
 
-
-
-
+    public void openSignInWindow() {
+        driver.findElement(signUp).click();
+    }
 }
