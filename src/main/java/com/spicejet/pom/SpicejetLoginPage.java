@@ -1,4 +1,4 @@
-package com.spicejet;
+package com.spicejet.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ public class SpicejetLoginPage {
 
     WebDriver driver;
 
-    SpicejetLoginPage(WebDriver driver) {
+    public SpicejetLoginPage(WebDriver driver) {
         this.driver = driver;
     }
 

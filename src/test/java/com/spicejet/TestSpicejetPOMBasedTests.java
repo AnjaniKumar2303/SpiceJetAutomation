@@ -1,5 +1,9 @@
 package com.spicejet;
 
+import com.spicejet.pom.SpicejetDashboardPage;
+import com.spicejet.pom.SpicejetLoginPage;
+import com.spicejet.pom.SpicejetSignUpPage;
+import com.spicejet.pom.HotelsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
@@ -8,7 +12,7 @@ import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 
-public class TestSpicejet {
+public class TestSpicejetPOMBasedTests {
 
     WebDriver driver;
 
@@ -68,5 +72,25 @@ public class TestSpicejet {
         spicejetLoginPage.enterMobileNumber();
         spicejetLoginPage.enterPassword();
         spicejetLoginPage.clickOnLogin();
+    }
+
+    @Test
+    public void testHotels() {
+        driver.navigate().to("https://www.spicejet.com/");
+        String mainWindow = driver.getWindowHandle();
+        SpicejetDashboardPage dashboardPage = new SpicejetDashboardPage(driver);
+        HotelsPage hotelsPage = new HotelsPage(driver);
+        dashboardPage.openHotelsPage();
+        Set<String> windows = driver.getWindowHandles();
+        Iterator<String> itr = windows.iterator();
+        while (itr.hasNext()) {
+            String childWindow = itr.next();
+            if (!childWindow.equals(mainWindow)) {
+                driver.switchTo().window(childWindow);
+                break;
+            }
+        }
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 }

@@ -1,4 +1,4 @@
-package com.spicejet;
+package com.spicejet.pom;
 
 import com.spicejet.utils.ScrollUtils;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ public class SpicejetSignUpPage {
 
     WebDriver driver;
 
-    SpicejetSignUpPage(WebDriver driver) {
+    public SpicejetSignUpPage(WebDriver driver) {
         this.driver = driver;
     }
 
